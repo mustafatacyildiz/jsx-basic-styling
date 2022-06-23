@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+REACT STYLING
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Harici bir dosya icersinde olusturulan bir component export default ile proje icerisinde herhangi bir yerde kullanima kullanima acimiş olur. Kullanmak icin hedef
+dosyada import .... from "./..." ile import yapmak yeterlidir.
 
-## Available Scripts
 
-In the project directory, you can run:
+React,JSX kullanmaktadir. JSX'de, HTMl elementleri dogrudan JS icerisinde kullanilabilir.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Componentler, HTML,CSS ve JS kodlarindan meydana gelmiş bir kod parcacigidir.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Bir componentin return () kismi ise JSX kodlari icerir.
 
-### `npm test`
+JSX'in kendine gore bazi kurallari vardir. Ornegin bir component eger birden fazla html elementi dondurmesi gerekirse bunlari tek bir container elemani ile sarmayalarak dondurmelidir.container icin div, article, header, <> v.b herhangi bir element kullanilabilir.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+App componentinin tanimlanmasi
 
-### `npm run build`
+JSX stillendirme yapilmayacaksa container icin <> kullanilabilir.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App(){
+    return (
+        <>
+        <Header />
+        <Content />
+        <Footer />
+        </>
+    );
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+JSX'de stillendirme farklli sekillerde yapilabilr.
+1-) Harici CSS sayfalari ile (index.css, app.css v.b)
+2-) Inline stillendirme ile (style = {{color:"red"}})
+3- )Local veya global degiskenler ile.
 
-### `npm run eject`
+NOTLAR:
+Stillendirme icin property-value(object) yapisi kullanilir. Property isimlerinde camelCase kullanimalidir. Class isimleri icin className kullanilir.
+Material UI, Styled Component, Sass, Bootstrap v.b harici kutuphaneler kullanilabilir.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Reactte dahili bulunan bir resmi kullanmak için import etmek gerekmektedir. Kullanımı aşağıdaki gibidir.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+import React from 'react'
+import kus from './img/kus.jpg'   //Dahili kaynak kullanımı için
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+const Content = () => {
+  return (
+    <div>
+        <h2>React JS</h2>
+        <p>React, kullanici ara birimi tasarlamak için kullanilan bir JS kutuphanesidi.</p>
+        <img src="https://cdn.pixabay.com/photo/2017/02/15/13/40/tulips-2068692__340.jpg" alt="" />  //Dış kaynak kullanımı
+        <img src={kus} alt="" />                                                                     //Dahili kaynak kullanımı için
+    </div>
+  )
+}
 
-## Learn More
+export default Content;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Inline stillendirme ile (style = {{color:"red"}}) :
 
-### Code Splitting
+const Content = () => {
+    const imgStyle = {
+        display: "block",
+        width:"500px",
+        margin: "1rem auto"
+    }
+  return (
+    <div>
+        <h2 style={{color:"red"}}>React JS</h2>
+        <p style={{backgroundColor:"lightgreen"}}>React, kullanici ara birimi tasarlamak için kullanilan bir JS kutuphanesidi.</p>
+        <img style={imgStyle} src="https://cdn.pixabay.com/photo/2017/02/15/13/40/tulips-2068692__340.jpg" alt="img1" />
+        <img style={imgStyle} src={kus} alt="img2"/>
+    </div>
+  )
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+export default Content;
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3- )Local veya global degiskenler ile.
 
-### Making a Progressive Web App
+import "./Content.css";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+const Content = () => {
+    const imgStyle = {
+        display: "block",
+        width:"500px",
+        margin: "1rem auto"
+    }
+  return (
+    <div>
+        <h2 style={{color:"red"}}>React JS</h2>
+        <p style={{backgroundColor:"lightgreen"}}>React, kullanici ara birimi tasarlamak için kullanilan bir JS kutuphanesidi.</p>
+        <img style={imgStyle} src="https://cdn.pixabay.com/photo/2017/02/15/13/40/tulips-2068692__340.jpg" alt="img1" />
+        <img style={imgStyle} src={kus} alt="img2"/>
+        <p className="par-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum libero, dolores laudantium beatae esse ipsum consequuntur, quos maxime, tempore itaque natus! Expedita accusantium dolorum inventore sequi nostrum fugit sit quas veniam voluptas. Suscipit fuga id voluptas officiis ipsa unde enim!</p>
+    </div>
+  )
+}
 
-### Advanced Configuration
+export default Content;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Content.css
 
-### Deployment
+.par-1{
+    font-size: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+    color: blue;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+index.CSS
 
-### `npm run build` fails to minify
+.par-1{
+  color: red;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+NOT:Sayfada index.css de bulunan par-1 rengi görünür. Çünkü parent alt dosyaları baskılar.
+
+CSS stillendirmeliri yaparken tüm bu stillendirmelerin tek bir dosyada birlesecigini unutmamak gerekir. Parent'daki bir stil asagidaki stilleri ezebilir. Bunun icin class isimlerinin her componente gore ayri ayri verilmesi daha dogru bir yaklasim olabilir. Ornegin content-par gibi 
